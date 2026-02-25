@@ -95,59 +95,76 @@ export default function DashboardPage() {
 
   return (
     <>
-      <div className="flex flex-1 flex-col overflow-hidden">
-        <div className="flex shrink-0 items-center justify-between border-b border-border bg-card px-6 py-4">
-          <h1 className="text-2xl font-semibold tracking-tight">Deals</h1>
-          <Button className="gap-2 bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm">
-            <Plus className="size-4" />
-            Add Deal
-          </Button>
+      <div className="flex flex-1 min-h-0 flex-col overflow-hidden">
+        <div className="flex shrink-0 flex-wrap items-center justify-between gap-4 border-b border-border bg-white px-6 py-4 shadow-sm">
+          <div>
+            <h1 className="text-2xl font-semibold tracking-tight text-foreground">Dashboard</h1>
+            <p className="text-sm text-muted-foreground mt-0.5">Pipeline health and at-risk deals</p>
+          </div>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="text-sm text-muted-foreground hidden sm:inline">Last 30 days</span>
+            <Button variant="outline" size="sm" className="border-border bg-white h-8">Filter</Button>
+            <Button variant="outline" size="sm" className="border-border bg-white h-8">Export</Button>
+            <Button className="gap-2 bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm h-8">
+              <Plus className="size-4" />
+              Add Deal
+            </Button>
+          </div>
         </div>
 
-        <main className="flex-1 overflow-y-auto">
-          <div className="p-6 space-y-6">
-            <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              <KpiCard title="Total Open Deals" value={openDeals.length} />
-              <KpiCard title="At-Risk Deals" value={atRiskCount} />
-              <KpiCard title="Avg Days in Stage" value={avgDaysInStage} subtitle="Across open deals" />
-              <KpiCard title="Weighted Pipeline Value" value={formatCurrency(weightedValue)} />
-            </section>
-
-            <section className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-              <Card className="rounded-xl border-border bg-card shadow-sm overflow-hidden">
-                <CardHeader className="pb-2 px-5 pt-5">
-                  <div data-slot="card-title" className="text-sm font-medium text-foreground">
-                    Deals by Stage
-                  </div>
-                </CardHeader>
-                <CardContent className="px-5 pb-5">
-                  <DealsByStageChart deals={openDeals} />
-                </CardContent>
-              </Card>
-              <Card className="rounded-xl border-border bg-card shadow-sm overflow-hidden">
-                <CardHeader className="pb-2 px-5 pt-5">
-                  <div data-slot="card-title" className="text-sm font-medium text-foreground">
-                    At-Risk Deals by Owner
-                  </div>
-                </CardHeader>
-                <CardContent className="px-5 pb-5">
-                  <AtRiskByOwnerChart deals={openDeals} />
-                </CardContent>
-              </Card>
-              <Card className="rounded-xl border-border bg-card shadow-sm overflow-hidden">
-                <CardHeader className="pb-2 px-5 pt-5">
-                  <div data-slot="card-title" className="text-sm font-medium text-foreground">
-                    Deal Aging (days since activity)
-                  </div>
-                </CardHeader>
-                <CardContent className="px-5 pb-5">
-                  <DealAgingChart deals={openDeals} />
-                </CardContent>
-              </Card>
+        <main className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden">
+          <div className="p-6 pb-10 space-y-8">
+            <section>
+              <h2 className="text-sm font-medium text-muted-foreground mb-3 uppercase tracking-wider">Overview</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <KpiCard title="Total Open Deals" value={openDeals.length} trend="+12%" />
+                <KpiCard title="At-Risk Deals" value={atRiskCount} trend="-5%" trendDown />
+                <KpiCard title="Avg Days in Stage" value={avgDaysInStage} subtitle="Across open deals" />
+                <KpiCard title="Weighted Pipeline Value" value={formatCurrency(weightedValue)} trend="+8%" />
+              </div>
             </section>
 
             <section>
-              <h2 className="text-lg font-semibold mb-4 tracking-tight">All Deals</h2>
+              <h2 className="text-sm font-medium text-muted-foreground mb-3 uppercase tracking-wider">Charts</h2>
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+                <Card className="rounded-2xl border border-border/80 bg-white shadow-sm overflow-hidden">
+                  <CardHeader className="pb-2 px-6 pt-6">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-semibold text-foreground">Deals by Stage</span>
+                      <Button variant="ghost" size="sm" className="h-7 text-xs text-muted-foreground">Filter</Button>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="px-6 pb-6 pt-0">
+                    <DealsByStageChart deals={openDeals} />
+                  </CardContent>
+                </Card>
+                <Card className="rounded-2xl border border-border/80 bg-white shadow-sm overflow-hidden">
+                  <CardHeader className="pb-2 px-6 pt-6">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-semibold text-foreground">At-Risk by Owner</span>
+                      <Button variant="ghost" size="sm" className="h-7 text-xs text-muted-foreground">Sort</Button>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="px-6 pb-6 pt-0">
+                    <AtRiskByOwnerChart deals={openDeals} />
+                  </CardContent>
+                </Card>
+                <Card className="rounded-2xl border border-border/80 bg-white shadow-sm overflow-hidden">
+                  <CardHeader className="pb-2 px-6 pt-6">
+                    <span className="text-sm font-semibold text-foreground">Deal Aging</span>
+                    <p className="text-xs text-muted-foreground mt-0.5">Days since last activity</p>
+                  </CardHeader>
+                  <CardContent className="px-6 pb-6 pt-0">
+                    <DealAgingChart deals={openDeals} />
+                  </CardContent>
+                </Card>
+              </div>
+            </section>
+
+            <section>
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">All Deals</h2>
+              </div>
               <DealsTable deals={deals} onSelectDeal={setSelectedDeal} />
             </section>
           </div>

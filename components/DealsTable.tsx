@@ -224,11 +224,11 @@ export function DealsTable({ deals, onSelectDeal }: DealsTableProps) {
         </div>
       </div>
 
-      <div className="rounded-xl border border-border overflow-hidden bg-card shadow-sm">
+      <div className="rounded-2xl border border-border/80 overflow-hidden bg-white shadow-sm">
         <div className="overflow-x-auto">
           <table className="w-full min-w-[1000px] text-sm">
             <thead>
-              <tr className="bg-muted/40 border-b border-border">
+              <tr className="bg-muted/30 border-b border-border">
                 <th className="w-10 px-4 py-3">
                   <button
                     type="button"
