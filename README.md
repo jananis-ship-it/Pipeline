@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Smart Pipeline Health Dashboard
 
-## Getting Started
+A CRM-style dashboard that flags at-risk deals and provides AI-ready summaries. Built with Next.js (App Router), TypeScript, TailwindCSS, Recharts, and mock data.
 
-First, run the development server:
+## Install
+
+```bash
+npm install
+```
+
+## Run
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000). The app redirects `/` to `/dashboard`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Dashboard** (`/dashboard`): KPIs (Total Open Deals, At-Risk Deals, Avg Days in Stage, Weighted Pipeline Value), plus three charts: Deals by Stage, At-Risk Deals by Owner, Deal Aging (days since activity).
+- **Deals table**: Sort (default: risk score desc), search (deal name/company), filters (Stage, Owner, Lead Source, Risk status). Row click opens a side drawer with deal details and an AI summary stub.
+- **Risk scoring**: Deterministic 0–100 score with status (Healthy / Watch / At Risk) and text reasons. Implemented in `lib/risk.ts`.
+- **AI summary**: Rule-based stub in the drawer; no API keys. A TODO marks where to plug in an LLM (e.g. OpenAI).
 
-## Learn More
+## Where to tweak thresholds
 
-To learn more about Next.js, take a look at the following resources:
+- **Risk score bands**: `lib/risk.ts` — `score <= 39` → Healthy, `40–69` → Watch, `70–100` → At Risk.
+- **Risk factors**: Same file — `ACTIVITY_RISK_DAYS`, `STAGE_RISK_DAYS`, `LOW_TOUCHES`, `MAX_DAYS_ACTIVITY`, `MAX_DAYS_STAGE`, and `LEAD_SOURCE_WEIGHT`.
+- **AI summary rules**: `lib/aiSummary.ts` — `getRecommendedAction()` (e.g. “follow-up if no activity > 7 days”).
+- **Mock data**: `data/mockDeals.ts` — deal count, stages, and seed for reproducibility.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Routes
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Route        | Description                    |
+|-------------|--------------------------------|
+| `/`         | Redirects to `/dashboard`      |
+| `/dashboard`| Main dashboard and deals table |
+| `/api/deals`| Raw deals (mock)               |
+| `/api/score`| Deals with risk scores         |
 
-## Deploy on Vercel
+## Tech stack
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Next.js 14+ (App Router), TypeScript, TailwindCSS
+- Recharts (charts), Zustand available (state is local React here)
+- Mock data in `data/mockDeals.ts`; no external APIs
