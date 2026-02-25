@@ -12,7 +12,7 @@ import {
   Megaphone,
   Zap,
   ChevronDown,
-  CreditCard,
+  PanelLeftClose,
 } from "lucide-react";
 
 const navItems = [
@@ -28,64 +28,71 @@ export function AppSidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="flex h-full w-[240px] shrink-0 flex-col border-r border-sidebar-border bg-sidebar">
-      <div className="flex h-14 items-center gap-2 border-b border-sidebar-border px-4">
-        <div className="flex items-center gap-2">
-          <div className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground text-sm font-semibold">
-            P
-          </div>
-          <div className="flex flex-col">
-            <span className="text-sm font-semibold text-sidebar-foreground">Pipeline Health</span>
-            <span className="text-xs text-muted-foreground">Primary</span>
-          </div>
+    <aside className="flex h-full w-[260px] shrink-0 flex-col bg-[#1e293b]">
+      <div className="flex h-14 items-center gap-2 border-b border-white/10 px-4">
+        <div className="flex items-center justify-center rounded-lg bg-[#3b82f6] text-white text-sm font-bold size-9">
+          P
+        </div>
+        <div className="flex flex-1 flex-col min-w-0">
+          <span className="text-sm font-semibold text-white truncate">Pipeline Health</span>
+          <span className="text-xs text-slate-400">Primary</span>
         </div>
         <button
           type="button"
-          className="ml-auto rounded p-1 hover:bg-sidebar-accent text-muted-foreground hover:text-sidebar-foreground"
+          className="rounded p-1.5 text-slate-400 hover:bg-white/10 hover:text-white transition-colors"
           aria-label="Switch account"
         >
           <ChevronDown className="size-4" />
         </button>
         <Link
           href="/settings"
-          className="rounded p-1 hover:bg-sidebar-accent text-muted-foreground hover:text-sidebar-foreground"
+          className="rounded p-1.5 text-slate-400 hover:bg-white/10 hover:text-white transition-colors"
           aria-label="Settings"
         >
-          <CreditCard className="size-4" />
+          <PanelLeftClose className="size-4" />
         </Link>
       </div>
 
-      <nav className="flex-1 space-y-0.5 p-2">
+      <nav className="flex-1 space-y-0.5 p-3">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = pathname === item.href;
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
-                isActive
-                  ? "bg-sidebar-accent text-sidebar-accent-foreground"
-                  : "text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-foreground"
-              )}
-            >
+          const content = (
+            <>
               <Icon className="size-5 shrink-0" />
-              <span className="flex-1">{item.label}</span>
+              <span className="flex-1 truncate">{item.label}</span>
               {item.badge && (
-                <span className="rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-medium text-amber-800 dark:bg-amber-900/30 dark:text-amber-400">
+                <span className="rounded bg-amber-400/20 px-1.5 py-0.5 text-[10px] font-medium text-amber-300">
                   {item.badge}
                 </span>
               )}
+            </>
+          );
+          const className = cn(
+            "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
+            isActive
+              ? "bg-[#3b82f6] text-white"
+              : "text-slate-300 hover:bg-white/10 hover:text-white"
+          );
+          if (item.href === "#") {
+            return (
+              <span key={item.label} className={cn(className, "cursor-default")}>
+                {content}
+              </span>
+            );
+          }
+          return (
+            <Link key={item.href} href={item.href} className={className}>
+              {content}
             </Link>
           );
         })}
       </nav>
 
-      <div className="border-t border-sidebar-border p-2">
+      <div className="border-t border-white/10 p-3">
         <Link
           href="/help"
-          className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-foreground"
+          className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-slate-400 hover:bg-white/10 hover:text-white transition-colors"
         >
           <Zap className="size-5 shrink-0" />
           Help & support

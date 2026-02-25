@@ -171,7 +171,7 @@ export function DealsTable({ deals, onSelectDeal }: DealsTableProps) {
   }) => (
     <th
       className={cn(
-        "text-left text-xs font-medium text-muted-foreground px-4 py-3 cursor-pointer hover:bg-muted/60 transition-colors",
+        "text-left text-xs font-medium text-slate-500 px-4 py-3 cursor-pointer hover:bg-slate-100 transition-colors",
         className
       )}
       onClick={() => toggleSort(keyName)}
@@ -190,12 +190,12 @@ export function DealsTable({ deals, onSelectDeal }: DealsTableProps) {
     <div className="space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-sm text-muted-foreground">
+          <span className="text-sm font-medium text-slate-600">
             {filteredAndSorted.length} Deals
           </span>
           <Select value={stageFilter} onValueChange={setStageFilter}>
-            <SelectTrigger className="w-[140px] h-9 border-muted bg-muted/30">
-              <SelectValue placeholder="All stages" />
+            <SelectTrigger className="w-[140px] h-9 rounded-lg border-slate-200 bg-white text-slate-700">
+              <SelectValue placeholder="All Deals" />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All Deals</SelectItem>
@@ -204,103 +204,91 @@ export function DealsTable({ deals, onSelectDeal }: DealsTableProps) {
               ))}
             </SelectContent>
           </Select>
-          <Button variant="outline" size="sm" className="h-9 gap-1.5 border-muted bg-muted/30">
+          <Button variant="outline" size="sm" className="h-9 gap-1.5 rounded-lg border-slate-200 bg-white text-slate-600 hover:bg-slate-50">
             <Filter className="size-4" />
             Filter
           </Button>
-          <Button variant="outline" size="sm" className="h-9 gap-1.5 border-muted bg-muted/30">
+          <Button variant="outline" size="sm" className="h-9 gap-1.5 rounded-lg border-slate-200 bg-white text-slate-600 hover:bg-slate-50">
             <LayoutGrid className="size-4" />
             Edit view
           </Button>
         </div>
-        <div className="relative w-64">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+        <div className="relative w-56 sm:w-64">
+          <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-slate-400" />
           <Input
             placeholder="Search"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-9 h-9 bg-muted/30 border-muted"
+            className="h-9 rounded-lg border-slate-200 bg-white pl-9 text-sm placeholder:text-slate-400"
           />
         </div>
       </div>
 
-      <div className="rounded-2xl border border-border/80 overflow-hidden bg-white shadow-sm">
+      <div className="rounded-2xl border border-slate-200/80 overflow-hidden bg-white shadow-sm">
         <div className="overflow-x-auto">
           <table className="w-full min-w-[1000px] text-sm">
             <thead>
-              <tr className="bg-muted/30 border-b border-border">
+              <tr className="border-b border-slate-200 bg-slate-50/80">
                 <th className="w-10 px-4 py-3">
                   <button
                     type="button"
                     onClick={toggleSelectAll}
-                    className="rounded p-0.5 hover:bg-muted"
+                    className="rounded p-0.5 hover:bg-slate-200"
                     aria-label="Select all"
                   >
                     {selectedIds.size === paginatedRows.length && paginatedRows.length > 0 ? (
-                      <CheckSquare className="size-4 text-primary" />
+                      <CheckSquare className="size-4 text-[#3b82f6]" />
                     ) : (
-                      <Square className="size-4 text-muted-foreground" />
+                      <Square className="size-4 text-slate-400" />
                     )}
                   </button>
                 </th>
                 <Th label="Deal name" keyName="company" icon={User} />
-                <th className="text-left text-xs font-medium text-muted-foreground px-4 py-3">
+                <th className="text-left text-xs font-medium text-slate-500 px-4 py-3">
                   <div className="flex items-center gap-2">
                     <Building2 className="size-4" />
                     Company
                   </div>
                 </th>
-                <th className="text-left text-xs font-medium text-muted-foreground px-4 py-3">
-                  Stage
-                </th>
-                <th className="text-left text-xs font-medium text-muted-foreground px-4 py-3">
-                  Owner
-                </th>
+                <th className="text-left text-xs font-medium text-slate-500 px-4 py-3">Stage</th>
+                <th className="text-left text-xs font-medium text-slate-500 px-4 py-3">Owner</th>
                 <Th label="Value" keyName="value" icon={DollarSign} />
-                <th className="text-left text-xs font-medium text-muted-foreground px-4 py-3">
+                <th className="text-left text-xs font-medium text-slate-500 px-4 py-3">
                   <div className="flex items-center gap-2">
                     <Calendar className="size-4" />
                     Last activity
                   </div>
                 </th>
-                <th className="text-left text-xs font-medium text-muted-foreground px-4 py-3">
-                  Days (activity)
-                </th>
-                <th className="text-left text-xs font-medium text-muted-foreground px-4 py-3">
-                  Days (stage)
-                </th>
-                <th className="text-left text-xs font-medium text-muted-foreground px-4 py-3">
-                  Touches
-                </th>
-                <th className="text-left text-xs font-medium text-muted-foreground px-4 py-3">
+                <th className="text-left text-xs font-medium text-slate-500 px-4 py-3">Days (activity)</th>
+                <th className="text-left text-xs font-medium text-slate-500 px-4 py-3">Days (stage)</th>
+                <th className="text-left text-xs font-medium text-slate-500 px-4 py-3">Touches</th>
+                <th className="text-left text-xs font-medium text-slate-500 px-4 py-3">
                   <div className="flex items-center gap-2">
                     <Tag className="size-4" />
                     Lead source
                   </div>
                 </th>
                 <Th label="Risk" keyName="riskScore" icon={AlertTriangle} />
-                <th className="text-left text-xs font-medium text-muted-foreground px-4 py-3">
-                  Status
-                </th>
+                <th className="text-left text-xs font-medium text-slate-500 px-4 py-3">Status</th>
               </tr>
             </thead>
             <tbody>
               {paginatedRows.map((deal) => (
                 <tr
                   key={deal.id}
-                  className="border-b border-border/80 hover:bg-muted/30 cursor-pointer transition-colors last:border-0"
+                  className="border-b border-slate-100 hover:bg-slate-50 cursor-pointer transition-colors last:border-0"
                   onClick={() => onSelectDeal(deal)}
                 >
                   <td className="px-4 py-3" onClick={(e) => e.stopPropagation()}>
                     <button
                       type="button"
                       onClick={() => toggleSelect(deal.id)}
-                      className="rounded p-0.5 hover:bg-muted"
+                      className="rounded p-0.5 hover:bg-slate-100"
                     >
                       {selectedIds.has(deal.id) ? (
-                        <CheckSquare className="size-4 text-primary" />
+                        <CheckSquare className="size-4 text-[#3b82f6]" />
                       ) : (
-                        <Square className="size-4 text-muted-foreground" />
+                        <Square className="size-4 text-slate-400" />
                       )}
                     </button>
                   </td>
@@ -313,14 +301,14 @@ export function DealsTable({ deals, onSelectDeal }: DealsTableProps) {
                   <td className="px-4 py-3">
                     <CompanyCell company={deal.company} />
                   </td>
-                  <td className="px-4 py-3 text-muted-foreground">{deal.stage}</td>
+                  <td className="px-4 py-3 text-slate-500">{deal.stage}</td>
                   <td className="px-4 py-3">{deal.owner}</td>
                   <td className="px-4 py-3 tabular-nums">{formatCurrency(deal.value)}</td>
-                  <td className="px-4 py-3 text-muted-foreground">{formatDate(deal.lastActivityAt)}</td>
+                  <td className="px-4 py-3 text-slate-500">{formatDate(deal.lastActivityAt)}</td>
                   <td className="px-4 py-3 tabular-nums">{deal.daysSinceActivity}</td>
                   <td className="px-4 py-3 tabular-nums">{deal.daysInStage}</td>
                   <td className="px-4 py-3">{deal.touchesCount}</td>
-                  <td className="px-4 py-3 text-muted-foreground">{deal.leadSource}</td>
+                  <td className="px-4 py-3 text-slate-500">{deal.leadSource}</td>
                   <td className="px-4 py-3 tabular-nums">{deal.risk.score}</td>
                   <td className="px-4 py-3">
                     <StatusBadge status={deal.risk.status} />
@@ -333,7 +321,7 @@ export function DealsTable({ deals, onSelectDeal }: DealsTableProps) {
       </div>
 
       <div className="flex flex-wrap items-center justify-between gap-4 pt-4">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-slate-500">
           Showing {start + 1}–{Math.min(start + PAGE_SIZE, filteredAndSorted.length)} of {filteredAndSorted.length} deals
         </p>
         <div className="flex items-center gap-2">
