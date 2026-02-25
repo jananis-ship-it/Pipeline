@@ -15,13 +15,36 @@ export function DealsByStageChart({ deals }: DealsByStageChartProps) {
   const data = Object.entries(byStage).map(([stage, count]) => ({ stage, count }));
 
   return (
-    <div className="h-[260px] w-full">
+    <div className="h-[240px] w-full">
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={data} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
-          <XAxis dataKey="stage" tick={{ fontSize: 12, fill: "#64748b" }} axisLine={{ stroke: "#e2e8f0" }} />
-          <YAxis tick={{ fontSize: 12, fill: "#64748b" }} allowDecimals={false} axisLine={{ stroke: "#e2e8f0" }} />
-          <Tooltip />
-          <Bar dataKey="count" fill="rgba(99, 102, 241, 0.35)" radius={[4, 4, 0, 0]} />
+        <BarChart data={data} margin={{ top: 12, right: 12, left: 0, bottom: 0 }}>
+          <XAxis
+            dataKey="stage"
+            tick={{ fontSize: 11, fill: "#94a3b8" }}
+            axisLine={{ stroke: "#f1f5f9" }}
+            tickLine={false}
+          />
+          <YAxis
+            tick={{ fontSize: 11, fill: "#94a3b8" }}
+            allowDecimals={false}
+            axisLine={false}
+            tickLine={false}
+          />
+          <Tooltip
+            contentStyle={{
+              backgroundColor: "#fff",
+              border: "1px solid #e2e8f0",
+              borderRadius: "8px",
+              fontSize: "12px",
+            }}
+            labelStyle={{ color: "#64748b" }}
+          />
+          <Bar
+            dataKey="count"
+            fill="#cbd5e1"
+            radius={[4, 4, 0, 0]}
+            maxBarSize={36}
+          />
         </BarChart>
       </ResponsiveContainer>
     </div>

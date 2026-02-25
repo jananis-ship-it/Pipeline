@@ -1,7 +1,9 @@
 "use client";
 
-import { Bar, BarChart, XAxis, YAxis, ResponsiveContainer, Tooltip } from "recharts";
+import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from "recharts";
 import type { ScoredDeal } from "@/lib/types";
+
+const LIGHT_COLORS = ["#e2e8f0", "#cbd5e1", "#94a3b8", "#f1f5f9", "#e2e8f0"];
 
 interface AtRiskByOwnerChartProps {
   deals: ScoredDeal[];
@@ -13,17 +15,52 @@ export function AtRiskByOwnerChart({ deals }: AtRiskByOwnerChartProps) {
     acc[d.owner] = (acc[d.owner] ?? 0) + 1;
     return acc;
   }, {});
-  const data = Object.entries(byOwner).map(([owner, count]) => ({ owner, count }));
+  const data = Object.entries(byOwner).map(([owner, count]) => ({ name: owner, value: count }));
+
+  if (data.length === 0) {
+    return (
+      <div className="flex h-[240px] w-full items-center justify-center text-sm text-slate-400">
+        No at-risk deals
+      </div>
+    );
+  }
 
   return (
-    <div className="h-[260px] w-full">
+    <div className="h-[240px] w-full">
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={data} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
-          <XAxis dataKey="owner" tick={{ fontSize: 11, fill: "#64748b" }} axisLine={{ stroke: "#e2e8f0" }} />
-          <YAxis tick={{ fontSize: 12, fill: "#64748b" }} allowDecimals={false} axisLine={{ stroke: "#e2e8f0" }} />
-          <Tooltip />
-          <Bar dataKey="count" fill="rgba(244, 63, 94, 0.4)" radius={[4, 4, 0, 0]} />
-        </BarChart>
+        <PieChart>
+          <Pie
+            data={data}
+            cx="50%"
+            cy="50%"
+            innerRadius={56}
+            outerRadius={80}
+            paddingAngle={2}
+            dataKey="value"
+            nameKey="name"
+          >
+            {data.map((_, index) => (
+              <Cell key={index} fill={LIGHT_COLORS[index % LIGHT_COLORS.length]} stroke="#fff" strokeWidth={1} />
+            ))}
+          </Pie>
+          <Tooltip
+            contentStyle={{
+              backgroundColor: "#fff",
+              border: "1px solid #e2e8f0",
+              borderRadius: "8px",
+              fontSize: "12px",
+            }}
+            formatter={(value: number | undefined) => [value ?? 0, "Deals"]}
+          />
+          <Legend
+            layout="vertical"
+            align="right"
+            verticalAlign="middle"
+            iconType="circle"
+            iconSize={8}
+            formatter={(value) => <span style={{ color: "#64748b", fontSize: 12 }}>{value}</span>}
+          />
+        </PieChart>
       </ResponsiveContainer>
     </div>
   );

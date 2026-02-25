@@ -96,32 +96,32 @@ export default function DashboardPage() {
   return (
     <>
       <div className="flex flex-1 min-h-0 flex-col overflow-hidden">
-        <div className="flex shrink-0 flex-wrap items-center justify-between gap-4 border-b border-slate-200 bg-white px-6 py-4">
+        <div className="flex shrink-0 flex-wrap items-center justify-between gap-4 border-b border-slate-100 bg-white px-6 py-4">
           <div>
-            <h1 className="text-2xl font-semibold tracking-tight text-slate-900">Dashboard</h1>
-            <p className="text-sm text-slate-500 mt-0.5">Pipeline health and at-risk deals</p>
+            <h1 className="text-xl font-medium tracking-tight text-slate-700">Dashboard</h1>
+            <p className="text-xs text-slate-400 mt-0.5">Pipeline health and at-risk deals</p>
           </div>
           <div className="flex flex-wrap items-center gap-2">
-            <Button variant="outline" size="sm" className="h-8 rounded-lg border-slate-200 bg-white text-slate-600 hover:bg-slate-50">
+            <Button variant="outline" size="sm" className="h-8 rounded-lg border-slate-100 bg-white text-slate-500 hover:bg-slate-50 text-xs">
               Last 30 days
             </Button>
-            <Button variant="outline" size="sm" className="h-8 rounded-lg border-slate-200 bg-white text-slate-600 hover:bg-slate-50">
+            <Button variant="outline" size="sm" className="h-8 rounded-lg border-slate-100 bg-white text-slate-500 hover:bg-slate-50 text-xs">
               Filter
             </Button>
-            <Button variant="outline" size="sm" className="h-8 rounded-lg border-slate-200 bg-white text-slate-600 hover:bg-slate-50">
+            <Button variant="outline" size="sm" className="h-8 rounded-lg border-slate-100 bg-white text-slate-500 hover:bg-slate-50 text-xs">
               Export
             </Button>
-            <Button className="h-8 gap-2 rounded-lg bg-slate-600 text-white hover:bg-slate-700 shadow-sm">
+            <Button className="h-8 gap-1.5 rounded-lg bg-slate-500 text-white hover:bg-slate-600 text-xs font-medium">
               <Plus className="size-4" />
               Add Deal
             </Button>
           </div>
         </div>
 
-        <main className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden bg-slate-50/80">
-          <div className="p-6 pb-10 space-y-8">
+        <main className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden bg-slate-50/50">
+          <div className="p-6 pb-10 space-y-6">
             <section>
-              <h2 className="text-xs font-semibold text-slate-500 mb-3 uppercase tracking-widest">Overview</h2>
+              <h2 className="text-[11px] font-medium text-slate-400 mb-2.5 uppercase tracking-widest">Overview</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <KpiCard
                   title="Total Open Deals"
@@ -156,36 +156,36 @@ export default function DashboardPage() {
             </section>
 
             <section>
-              <h2 className="text-xs font-semibold text-slate-500 mb-3 uppercase tracking-widest">Charts</h2>
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
-                <Card className="rounded-2xl border border-slate-200/80 bg-white shadow-sm overflow-hidden">
-                  <CardHeader className="pb-2 px-6 pt-6">
+              <h2 className="text-[11px] font-medium text-slate-400 mb-2.5 uppercase tracking-widest">Charts</h2>
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                <Card className="rounded-xl border border-slate-100 bg-white shadow-none overflow-hidden">
+                  <CardHeader className="pb-1 px-5 pt-4">
                     <div className="flex items-center justify-between">
-                      <span className="text-sm font-semibold text-slate-900">Deals by Stage</span>
-                      <Button variant="ghost" size="sm" className="h-7 text-xs text-slate-500 hover:text-slate-700">Filter</Button>
+                      <span className="text-xs font-medium text-slate-600">Deals by Stage</span>
+                      <Button variant="ghost" size="sm" className="h-6 text-[11px] text-slate-400 hover:text-slate-600">Filter</Button>
                     </div>
                   </CardHeader>
-                  <CardContent className="px-6 pb-6 pt-0">
+                  <CardContent className="px-5 pb-4 pt-0">
                     <DealsByStageChart deals={openDeals} />
                   </CardContent>
                 </Card>
-                <Card className="rounded-2xl border border-slate-200/80 bg-white shadow-sm overflow-hidden">
-                  <CardHeader className="pb-2 px-6 pt-6">
+                <Card className="rounded-xl border border-slate-100 bg-white shadow-none overflow-hidden">
+                  <CardHeader className="pb-1 px-5 pt-4">
                     <div className="flex items-center justify-between">
-                      <span className="text-sm font-semibold text-slate-900">At-Risk by Owner</span>
-                      <Button variant="ghost" size="sm" className="h-7 text-xs text-slate-500 hover:text-slate-700">Sort</Button>
+                      <span className="text-xs font-medium text-slate-600">At-Risk by Owner</span>
+                      <Button variant="ghost" size="sm" className="h-6 text-[11px] text-slate-400 hover:text-slate-600">Sort</Button>
                     </div>
                   </CardHeader>
-                  <CardContent className="px-6 pb-6 pt-0">
+                  <CardContent className="px-5 pb-4 pt-0">
                     <AtRiskByOwnerChart deals={openDeals} />
                   </CardContent>
                 </Card>
-                <Card className="rounded-2xl border border-slate-200/80 bg-white shadow-sm overflow-hidden">
-                  <CardHeader className="pb-2 px-6 pt-6">
-                    <span className="text-sm font-semibold text-slate-900">Deal Aging</span>
-                    <p className="text-xs text-slate-500 mt-0.5">Days since last activity</p>
+                <Card className="rounded-xl border border-slate-100 bg-white shadow-none overflow-hidden">
+                  <CardHeader className="pb-1 px-5 pt-4">
+                    <span className="text-xs font-medium text-slate-600">Deal Aging</span>
+                    <p className="text-[11px] text-slate-400 mt-0.5">Days since last activity</p>
                   </CardHeader>
-                  <CardContent className="px-6 pb-6 pt-0">
+                  <CardContent className="px-5 pb-4 pt-0">
                     <DealAgingChart deals={openDeals} />
                   </CardContent>
                 </Card>
@@ -193,7 +193,7 @@ export default function DashboardPage() {
             </section>
 
             <section>
-              <h2 className="text-xs font-semibold text-slate-500 mb-3 uppercase tracking-widest">All Deals</h2>
+              <h2 className="text-[11px] font-medium text-slate-400 mb-2.5 uppercase tracking-widest">All Deals</h2>
               <DealsTable deals={deals} onSelectDeal={setSelectedDeal} />
             </section>
           </div>

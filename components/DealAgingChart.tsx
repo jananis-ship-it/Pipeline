@@ -1,6 +1,6 @@
 "use client";
 
-import { Bar, BarChart, XAxis, YAxis, ResponsiveContainer, Tooltip } from "recharts";
+import { Area, AreaChart, XAxis, YAxis, ResponsiveContainer, Tooltip } from "recharts";
 import type { ScoredDeal } from "@/lib/types";
 
 const BUCKETS = [
@@ -25,14 +25,44 @@ export function DealAgingChart({ deals }: DealAgingChartProps) {
   }));
 
   return (
-    <div className="h-[260px] w-full">
+    <div className="h-[240px] w-full">
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={distribution} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
-          <XAxis dataKey="range" tick={{ fontSize: 12, fill: "#64748b" }} axisLine={{ stroke: "#e2e8f0" }} />
-          <YAxis tick={{ fontSize: 12, fill: "#64748b" }} allowDecimals={false} axisLine={{ stroke: "#e2e8f0" }} />
-          <Tooltip formatter={(value: number | undefined) => [value ?? 0, "Deals"]} />
-          <Bar dataKey="count" fill="rgba(20, 184, 166, 0.4)" radius={[4, 4, 0, 0]} />
-        </BarChart>
+        <AreaChart data={distribution} margin={{ top: 12, right: 12, left: 0, bottom: 0 }}>
+          <defs>
+            <linearGradient id="agingFill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#94a3b8" stopOpacity={0.2} />
+              <stop offset="100%" stopColor="#94a3b8" stopOpacity={0} />
+            </linearGradient>
+          </defs>
+          <XAxis
+            dataKey="range"
+            tick={{ fontSize: 11, fill: "#94a3b8" }}
+            axisLine={{ stroke: "#f1f5f9" }}
+            tickLine={false}
+          />
+          <YAxis
+            tick={{ fontSize: 11, fill: "#94a3b8" }}
+            allowDecimals={false}
+            axisLine={false}
+            tickLine={false}
+          />
+          <Tooltip
+            contentStyle={{
+              backgroundColor: "#fff",
+              border: "1px solid #e2e8f0",
+              borderRadius: "8px",
+              fontSize: "12px",
+            }}
+            formatter={(value: number | undefined) => [value ?? 0, "Deals"]}
+          />
+          <Area
+            type="monotone"
+            dataKey="count"
+            stroke="#94a3b8"
+            strokeWidth={1.5}
+            fill="url(#agingFill)"
+          />
+        </AreaChart>
       </ResponsiveContainer>
     </div>
   );
