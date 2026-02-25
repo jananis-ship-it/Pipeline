@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
 interface KpiCardProps {
@@ -10,16 +10,12 @@ interface KpiCardProps {
 
 export function KpiCard({ title, value, subtitle, className }: KpiCardProps) {
   return (
-    <Card className={cn("", className)} size="default">
-      <CardHeader className="pb-1">
-        <div data-slot="card-title" className="text-sm font-medium text-muted-foreground">
-          {title}
-        </div>
-      </CardHeader>
-      <CardContent className="pt-0">
-        <div className="text-2xl font-semibold tabular-nums">{value}</div>
+    <Card className={cn("rounded-xl border-border bg-card shadow-sm", className)} size="default">
+      <CardContent className="p-5">
+        <p className="text-sm font-medium text-muted-foreground">{title}</p>
+        <p className="mt-1 text-2xl font-semibold tabular-nums tracking-tight">{value}</p>
         {subtitle != null && (
-          <p className="text-xs text-muted-foreground mt-0.5">{subtitle}</p>
+          <p className="mt-0.5 text-xs text-muted-foreground">{subtitle}</p>
         )}
       </CardContent>
     </Card>

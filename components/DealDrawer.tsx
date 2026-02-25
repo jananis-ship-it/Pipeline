@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { formatDate, formatCurrency } from "@/lib/date";
 import { generateDealSummary } from "@/lib/aiSummary";
 import type { ScoredDeal } from "@/lib/types";
@@ -28,42 +27,45 @@ export function DealDrawer({ deal, onClose }: DealDrawerProps) {
   if (!deal) return null;
 
   const summary = generateDealSummary(deal);
-  const statusVariant =
-    deal.risk.status === "At Risk"
-      ? "destructive"
-      : deal.risk.status === "Watch"
-        ? "secondary"
-        : "default";
+  const statusStyles = {
+    Healthy: "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-400",
+    Watch: "bg-amber-50 text-amber-700 dark:bg-amber-950/50 dark:text-amber-400",
+    "At Risk": "bg-red-50 text-red-700 dark:bg-red-950/50 dark:text-red-400",
+  };
 
   const drawer = (
     <>
       <div
-        className="fixed inset-0 z-40 bg-black/40"
+        className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm"
         aria-hidden
         onClick={onClose}
       />
       <aside
         className={cn(
-          "fixed top-0 right-0 z-50 h-full w-full max-w-md bg-background shadow-xl",
+          "fixed top-0 right-0 z-50 h-full w-full max-w-md bg-card border-l border-border shadow-2xl",
           "flex flex-col overflow-hidden",
           "animate-in slide-in-from-right duration-200"
         )}
         role="dialog"
         aria-label="Deal details"
       >
-        <div className="flex items-center justify-between border-b px-4 py-3">
+        <div className="flex items-center justify-between border-b border-border bg-muted/30 px-5 py-4">
           <h2 className="text-lg font-semibold truncate pr-2">{deal.name}</h2>
-          <Button variant="ghost" size="icon" onClick={onClose} aria-label="Close">
+          <Button variant="ghost" size="icon" onClick={onClose} aria-label="Close" className="rounded-lg">
             <X className="size-4" />
           </Button>
         </div>
-        <div className="flex-1 overflow-y-auto p-4 space-y-4">
+        <div className="flex-1 overflow-y-auto p-5 space-y-4">
           <div className="flex flex-wrap gap-2">
-            <Badge variant={statusVariant}>{deal.risk.status}</Badge>
-            <Badge variant="outline">Risk: {deal.risk.score}</Badge>
+            <span className={cn("rounded-md px-2.5 py-0.5 text-xs font-medium", statusStyles[deal.risk.status])}>
+              {deal.risk.status}
+            </span>
+            <span className="rounded-md border border-border bg-muted/50 px-2.5 py-0.5 text-xs font-medium text-muted-foreground">
+              Risk: {deal.risk.score}
+            </span>
           </div>
 
-          <Card size="sm">
+          <Card size="sm" className="rounded-xl border-border">
             <CardHeader className="pb-1">
               <div data-slot="card-title" className="text-sm font-medium">
                 Details
@@ -82,7 +84,7 @@ export function DealDrawer({ deal, onClose }: DealDrawerProps) {
           </Card>
 
           {deal.risk.reasons.length > 0 && (
-            <Card size="sm">
+            <Card size="sm" className="rounded-xl border-border">
               <CardHeader className="pb-1">
                 <div data-slot="card-title" className="text-sm font-medium">
                   Risk reasons
@@ -98,7 +100,7 @@ export function DealDrawer({ deal, onClose }: DealDrawerProps) {
             </Card>
           )}
 
-          <Card size="sm">
+          <Card size="sm" className="rounded-xl border-border">
             <CardHeader className="pb-1">
               <div data-slot="card-title" className="text-sm font-medium">
                 AI Summary
