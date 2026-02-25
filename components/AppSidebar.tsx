@@ -17,10 +17,10 @@ import {
 
 const navItems = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { href: "#", label: "Workflows", icon: Workflow },
-  { href: "#", label: "Apps", icon: Grid3X3 },
-  { href: "#", label: "AI agents", icon: Bot },
-  { href: "#", label: "Campaigns", icon: Megaphone },
+  { href: "/workflows", label: "Workflows", icon: Workflow },
+  { href: "/apps", label: "Apps", icon: Grid3X3 },
+  { href: "/ai-agents", label: "AI agents", icon: Bot },
+  { href: "/campaigns", label: "Campaigns", icon: Megaphone },
   { href: "#", label: "Pipelines", icon: GitBranch, badge: "Soon" },
 ];
 
@@ -46,13 +46,13 @@ export function AppSidebar() {
         >
           <ChevronDown className="size-4" />
         </button>
-        <button
-          type="button"
+        <Link
+          href="/settings"
           className="rounded p-1 hover:bg-sidebar-accent text-muted-foreground hover:text-sidebar-foreground"
           aria-label="Settings"
         >
           <CreditCard className="size-4" />
-        </button>
+        </Link>
       </div>
 
       <nav className="flex-1 space-y-0.5 p-2">
@@ -83,13 +83,13 @@ export function AppSidebar() {
       </nav>
 
       <div className="border-t border-sidebar-border p-2">
-        <a
-          href="#"
+        <Link
+          href="/help"
           className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-foreground"
         >
           <Zap className="size-5 shrink-0" />
           Help & support
-        </a>
+        </Link>
       </div>
     </aside>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -26,7 +26,11 @@ import {
   AlertTriangle,
   CheckSquare,
   Square,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
+
+const PAGE_SIZE = 10;
 
 interface DealsTableProps {
   deals: ScoredDeal[];
@@ -91,6 +95,7 @@ export function DealsTable({ deals, onSelectDeal }: DealsTableProps) {
   const [sortKey, setSortKey] = useState<SortKey>("riskScore");
   const [sortDir, setSortDir] = useState<"asc" | "desc">("desc");
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [currentPage, setCurrentPage] = useState(1);
 
   const stages = useMemo(() => [...new Set(deals.map((d) => d.stage))].sort(), [deals]);
   const owners = useMemo(() => [...new Set(deals.map((d) => d.owner))].sort(), [deals]);
@@ -120,6 +125,18 @@ export function DealsTable({ deals, onSelectDeal }: DealsTableProps) {
     return list;
   }, [deals, search, stageFilter, ownerFilter, leadSourceFilter, riskFilter, sortKey, sortDir]);
 
+  const totalPages = Math.max(1, Math.ceil(filteredAndSorted.length / PAGE_SIZE));
+  const start = (currentPage - 1) * PAGE_SIZE;
+  const paginatedRows = filteredAndSorted.slice(start, start + PAGE_SIZE);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search, stageFilter, ownerFilter, leadSourceFilter, riskFilter]);
+
+  const goToPage = (page: number) => {
+    setCurrentPage(Math.max(1, Math.min(page, totalPages)));
+  };
+
   const toggleSort = (key: SortKey) => {
     if (sortKey === key) setSortDir((d) => (d === "asc" ? "desc" : "asc"));
     else {
@@ -129,8 +146,8 @@ export function DealsTable({ deals, onSelectDeal }: DealsTableProps) {
   };
 
   const toggleSelectAll = () => {
-    if (selectedIds.size === filteredAndSorted.length) setSelectedIds(new Set());
-    else setSelectedIds(new Set(filteredAndSorted.map((d) => d.id)));
+    if (selectedIds.size === paginatedRows.length) setSelectedIds(new Set());
+    else setSelectedIds(new Set(paginatedRows.map((d) => d.id)));
   };
   const toggleSelect = (id: string) => {
     setSelectedIds((prev) => {
@@ -219,7 +236,7 @@ export function DealsTable({ deals, onSelectDeal }: DealsTableProps) {
                     className="rounded p-0.5 hover:bg-muted"
                     aria-label="Select all"
                   >
-                    {selectedIds.size === filteredAndSorted.length && filteredAndSorted.length > 0 ? (
+                    {selectedIds.size === paginatedRows.length && paginatedRows.length > 0 ? (
                       <CheckSquare className="size-4 text-primary" />
                     ) : (
                       <Square className="size-4 text-muted-foreground" />
@@ -268,7 +285,7 @@ export function DealsTable({ deals, onSelectDeal }: DealsTableProps) {
               </tr>
             </thead>
             <tbody>
-              {filteredAndSorted.map((deal) => (
+              {paginatedRows.map((deal) => (
                 <tr
                   key={deal.id}
                   className="border-b border-border/80 hover:bg-muted/30 cursor-pointer transition-colors last:border-0"
@@ -314,9 +331,52 @@ export function DealsTable({ deals, onSelectDeal }: DealsTableProps) {
           </table>
         </div>
       </div>
-      <p className="text-xs text-muted-foreground">
-        Showing {filteredAndSorted.length} of {deals.length} deals · Click a row for details
-      </p>
+
+      <div className="flex flex-wrap items-center justify-between gap-4 pt-4">
+        <p className="text-sm text-muted-foreground">
+          Showing {start + 1}–{Math.min(start + PAGE_SIZE, filteredAndSorted.length)} of {filteredAndSorted.length} deals
+        </p>
+        <div className="flex items-center gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            className="h-8 w-8 p-0"
+            onClick={() => goToPage(currentPage - 1)}
+            disabled={currentPage <= 1}
+          >
+            <ChevronLeft className="size-4" />
+          </Button>
+          <div className="flex items-center gap-0.5">
+            {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+              let pageNum: number;
+              if (totalPages <= 5) pageNum = i + 1;
+              else if (currentPage <= 3) pageNum = i + 1;
+              else if (currentPage >= totalPages - 2) pageNum = totalPages - 4 + i;
+              else pageNum = currentPage - 2 + i;
+              return (
+                <Button
+                  key={pageNum}
+                  variant={currentPage === pageNum ? "default" : "outline"}
+                  size="sm"
+                  className="h-8 w-8 p-0"
+                  onClick={() => goToPage(pageNum)}
+                >
+                  {pageNum}
+                </Button>
+              );
+            })}
+          </div>
+          <Button
+            variant="outline"
+            size="sm"
+            className="h-8 w-8 p-0"
+            onClick={() => goToPage(currentPage + 1)}
+            disabled={currentPage >= totalPages}
+          >
+            <ChevronRight className="size-4" />
+          </Button>
+        </div>
+      </div>
     </div>
   );
 }
