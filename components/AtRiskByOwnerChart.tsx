@@ -19,10 +19,10 @@ export function AtRiskByOwnerChart({ deals }: AtRiskByOwnerChartProps) {
     <div className="h-[260px] w-full">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={data} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
-          <XAxis dataKey="owner" tick={{ fontSize: 11 }} />
-          <YAxis tick={{ fontSize: 12 }} allowDecimals={false} />
+          <XAxis dataKey="owner" tick={{ fontSize: 11, fill: "#64748b" }} axisLine={{ stroke: "#e2e8f0" }} />
+          <YAxis tick={{ fontSize: 12, fill: "#64748b" }} allowDecimals={false} axisLine={{ stroke: "#e2e8f0" }} />
           <Tooltip />
-          <Bar dataKey="count" fill="var(--destructive)" radius={[4, 4, 0, 0]} />
+          <Bar dataKey="count" fill="rgba(244, 63, 94, 0.4)" radius={[4, 4, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
     </div>

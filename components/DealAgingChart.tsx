@@ -28,10 +28,10 @@ export function DealAgingChart({ deals }: DealAgingChartProps) {
     <div className="h-[260px] w-full">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={distribution} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
-          <XAxis dataKey="range" tick={{ fontSize: 12 }} />
-          <YAxis tick={{ fontSize: 12 }} allowDecimals={false} />
+          <XAxis dataKey="range" tick={{ fontSize: 12, fill: "#64748b" }} axisLine={{ stroke: "#e2e8f0" }} />
+          <YAxis tick={{ fontSize: 12, fill: "#64748b" }} allowDecimals={false} axisLine={{ stroke: "#e2e8f0" }} />
           <Tooltip formatter={(value: number | undefined) => [value ?? 0, "Deals"]} />
-          <Bar dataKey="count" fill="var(--chart-2)" radius={[4, 4, 0, 0]} />
+          <Bar dataKey="count" fill="rgba(20, 184, 166, 0.4)" radius={[4, 4, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
     </div>

@@ -3,11 +3,11 @@ import { cn } from "@/lib/utils";
 import { TrendingUp, TrendingDown } from "lucide-react";
 
 const ICON_COLORS = [
-  "bg-violet-100 text-violet-600",
-  "bg-rose-100 text-rose-600",
-  "bg-teal-100 text-teal-600",
-  "bg-emerald-100 text-emerald-600",
-  "bg-amber-100 text-amber-600",
+  "bg-violet-50 text-violet-400",
+  "bg-rose-50 text-rose-400",
+  "bg-teal-50 text-teal-400",
+  "bg-emerald-50 text-emerald-400",
+  "bg-amber-50 text-amber-400",
 ] as const;
 
 interface KpiCardProps {
@@ -56,7 +56,7 @@ export function KpiCard({
           </div>
           <a
             href="#"
-            className="text-xs font-medium text-primary hover:underline shrink-0"
+            className="text-xs font-medium text-slate-500 hover:text-slate-700 shrink-0"
           >
             View Details
           </a>
@@ -68,7 +68,7 @@ export function KpiCard({
             <span
               className={cn(
                 "flex items-center text-xs font-medium",
-                trendDown ? "text-red-600" : "text-emerald-600"
+                trendDown ? "text-rose-500" : "text-emerald-500"
               )}
             >
               {trendDown ? (

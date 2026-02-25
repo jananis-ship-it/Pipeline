@@ -18,10 +18,10 @@ export function DealsByStageChart({ deals }: DealsByStageChartProps) {
     <div className="h-[260px] w-full">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={data} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
-          <XAxis dataKey="stage" tick={{ fontSize: 12 }} />
-          <YAxis tick={{ fontSize: 12 }} allowDecimals={false} />
+          <XAxis dataKey="stage" tick={{ fontSize: 12, fill: "#64748b" }} axisLine={{ stroke: "#e2e8f0" }} />
+          <YAxis tick={{ fontSize: 12, fill: "#64748b" }} allowDecimals={false} axisLine={{ stroke: "#e2e8f0" }} />
           <Tooltip />
-          <Bar dataKey="count" fill="var(--chart-1)" radius={[4, 4, 0, 0]} />
+          <Bar dataKey="count" fill="rgba(99, 102, 241, 0.35)" radius={[4, 4, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
     </div>

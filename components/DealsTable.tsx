@@ -70,9 +70,9 @@ function CompanyCell({ company }: { company: string }) {
 
 function StatusBadge({ status }: { status: "Healthy" | "Watch" | "At Risk" }) {
   const styles = {
-    Healthy: "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-400",
-    Watch: "bg-amber-50 text-amber-700 dark:bg-amber-950/50 dark:text-amber-400",
-    "At Risk": "bg-red-50 text-red-700 dark:bg-red-950/50 dark:text-red-400",
+    Healthy: "bg-emerald-50/90 text-emerald-600",
+    Watch: "bg-amber-50/90 text-amber-600",
+    "At Risk": "bg-rose-50/90 text-rose-600",
   };
   return (
     <span
@@ -237,7 +237,7 @@ export function DealsTable({ deals, onSelectDeal }: DealsTableProps) {
                     aria-label="Select all"
                   >
                     {selectedIds.size === paginatedRows.length && paginatedRows.length > 0 ? (
-                      <CheckSquare className="size-4 text-[#3b82f6]" />
+                      <CheckSquare className="size-4 text-slate-500" />
                     ) : (
                       <Square className="size-4 text-slate-400" />
                     )}
@@ -286,7 +286,7 @@ export function DealsTable({ deals, onSelectDeal }: DealsTableProps) {
                       className="rounded p-0.5 hover:bg-slate-100"
                     >
                       {selectedIds.has(deal.id) ? (
-                        <CheckSquare className="size-4 text-[#3b82f6]" />
+                        <CheckSquare className="size-4 text-slate-500" />
                       ) : (
                         <Square className="size-4 text-slate-400" />
                       )}

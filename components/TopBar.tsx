@@ -29,7 +29,7 @@ export function TopBar() {
           type="button"
           className="ml-2 flex items-center gap-2 rounded-lg px-2 py-1.5 hover:bg-slate-100 transition-colors"
         >
-          <div className="flex size-8 items-center justify-center rounded-full bg-[#3b82f6] text-white text-sm font-medium">
+          <div className="flex size-8 items-center justify-center rounded-full bg-slate-500 text-white text-sm font-medium">
             U
           </div>
           <span className="hidden text-sm font-medium text-slate-700 sm:inline">Account</span>

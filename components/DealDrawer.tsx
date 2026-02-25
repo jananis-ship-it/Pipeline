@@ -28,9 +28,9 @@ export function DealDrawer({ deal, onClose }: DealDrawerProps) {
 
   const summary = generateDealSummary(deal);
   const statusStyles = {
-    Healthy: "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-400",
-    Watch: "bg-amber-50 text-amber-700 dark:bg-amber-950/50 dark:text-amber-400",
-    "At Risk": "bg-red-50 text-red-700 dark:bg-red-950/50 dark:text-red-400",
+    Healthy: "bg-emerald-50/90 text-emerald-600",
+    Watch: "bg-amber-50/90 text-amber-600",
+    "At Risk": "bg-rose-50/90 text-rose-600",
   };
 
   const drawer = (

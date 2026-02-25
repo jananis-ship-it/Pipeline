@@ -30,7 +30,7 @@ export function AppSidebar() {
   return (
     <aside className="flex h-full w-[260px] shrink-0 flex-col bg-[#1e293b]">
       <div className="flex h-14 items-center gap-2 border-b border-white/10 px-4">
-        <div className="flex items-center justify-center rounded-lg bg-[#3b82f6] text-white text-sm font-bold size-9">
+        <div className="flex items-center justify-center rounded-lg bg-slate-500 text-white text-sm font-bold size-9">
           P
         </div>
         <div className="flex flex-1 flex-col min-w-0">
@@ -71,7 +71,7 @@ export function AppSidebar() {
           const className = cn(
             "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
             isActive
-              ? "bg-[#3b82f6] text-white"
+              ? "bg-slate-600 text-white"
               : "text-slate-300 hover:bg-white/10 hover:text-white"
           );
           if (item.href === "#") {

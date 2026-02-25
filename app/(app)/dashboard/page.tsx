@@ -111,7 +111,7 @@ export default function DashboardPage() {
             <Button variant="outline" size="sm" className="h-8 rounded-lg border-slate-200 bg-white text-slate-600 hover:bg-slate-50">
               Export
             </Button>
-            <Button className="h-8 gap-2 rounded-lg bg-[#3b82f6] text-white hover:bg-[#2563eb] shadow-sm">
+            <Button className="h-8 gap-2 rounded-lg bg-slate-600 text-white hover:bg-slate-700 shadow-sm">
               <Plus className="size-4" />
               Add Deal
             </Button>
