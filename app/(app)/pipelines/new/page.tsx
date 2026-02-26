@@ -5,7 +5,20 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { ArrowLeft } from "lucide-react";
+
+const pipelineTypes = [
+  { value: "sales", label: "Sales", desc: "Lead → Qualified → Meeting → Proposal → Negotiation → Won/Lost" },
+  { value: "leadgen", label: "Lead gen", desc: "New → Contacted → Qualified → Handoff" },
+  { value: "renewals", label: "Renewals", desc: "Upcoming → In review → Renewed / Churned" },
+];
 
 export default function NewPipelinePage() {
   return (
@@ -19,21 +32,40 @@ export default function NewPipelinePage() {
         </Button>
       </div>
       <main className="flex-1 overflow-y-auto p-6">
-        <Card className="mx-auto max-w-lg rounded-xl border border-slate-100 bg-white shadow-none">
+        <Card className="mx-auto max-w-lg rounded-xl border border-slate-200 bg-white shadow-sm">
           <CardHeader>
-            <h2 className="text-base font-semibold text-slate-700">New pipeline</h2>
-            <p className="text-xs text-slate-500">Create a new deal pipeline with custom stages.</p>
+            <h2 className="text-base font-semibold text-slate-800">New pipeline</h2>
+            <p className="text-sm text-slate-500">
+              Pipelines define how deals move through stages. Choose a template or create from scratch.
+            </p>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="name" className="text-xs">Name</Label>
-              <Input id="name" placeholder="e.g. Sales" className="rounded-lg border-slate-200 text-sm" />
+              <Label className="text-sm font-medium text-slate-700">Pipeline type</Label>
+              <Select defaultValue="sales">
+                <SelectTrigger className="rounded-lg border-slate-200">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {pipelineTypes.map((t) => (
+                    <SelectItem key={t.value} value={t.value}>{t.label}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="name" className="text-sm font-medium text-slate-700">Pipeline name</Label>
+              <Input
+                id="name"
+                placeholder="e.g. Sales pipeline"
+                className="rounded-lg border-slate-200 text-sm"
+              />
             </div>
             <div className="flex gap-2 pt-2">
-              <Button asChild className="rounded-lg bg-slate-500 text-white hover:bg-slate-600 text-xs">
+              <Button asChild className="rounded-lg bg-blue-800 text-white hover:bg-blue-900 text-sm font-medium">
                 <Link href="/pipelines">Create pipeline</Link>
               </Button>
-              <Button asChild variant="outline" size="sm" className="rounded-lg border-slate-200 text-xs">
+              <Button asChild variant="outline" size="sm" className="rounded-lg border-slate-200 text-sm">
                 <Link href="/pipelines">Cancel</Link>
               </Button>
             </div>

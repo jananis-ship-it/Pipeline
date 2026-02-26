@@ -16,7 +16,7 @@ export default function AIAgentsPage() {
     <div className="flex flex-1 flex-col overflow-hidden">
       <div className="flex shrink-0 items-center justify-between border-b border-slate-200 bg-white px-6 py-4">
         <h1 className="text-xl font-medium tracking-tight text-slate-700">AI agents</h1>
-        <Button asChild className="h-8 gap-1.5 rounded-lg bg-slate-500 text-white hover:bg-slate-600 text-xs font-medium">
+        <Button asChild className="h-8 gap-1.5 rounded-lg bg-blue-800 text-white hover:bg-blue-900 text-xs font-medium">
           <Link href="/ai-agents/create">
             <Plus className="size-4" />
             New agent
@@ -58,7 +58,7 @@ export default function AIAgentsPage() {
               <h3 className="font-semibold">Use AI in your pipeline</h3>
               <p className="text-sm text-muted-foreground">Agents can summarize deals, suggest next steps, and score risk.</p>
             </div>
-            <Button asChild className="ml-auto h-8 rounded-lg bg-slate-500 text-white hover:bg-slate-600 text-xs">
+            <Button asChild className="ml-auto h-8 rounded-lg bg-blue-800 text-white hover:bg-blue-900 text-xs">
             <Link href="/ai-agents/create">Create agent</Link>
           </Button>
           </CardContent>

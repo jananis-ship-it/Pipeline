@@ -96,22 +96,22 @@ export default function DashboardPage() {
   return (
     <>
       <div className="flex flex-1 min-h-0 flex-col overflow-hidden">
-        <div className="flex shrink-0 flex-wrap items-center justify-between gap-4 border-b border-slate-100 bg-white px-6 py-4">
+        <div className="flex shrink-0 flex-wrap items-center justify-between gap-4 border-b border-slate-200 bg-white px-6 py-4">
           <div>
             <h1 className="text-xl font-medium tracking-tight text-slate-700">Dashboard</h1>
-            <p className="text-xs text-slate-400 mt-0.5">Pipeline health and at-risk deals</p>
+            <p className="text-xs text-slate-500 mt-0.5">Pipeline health and at-risk deals</p>
           </div>
           <div className="flex flex-wrap items-center gap-2">
-            <Button variant="outline" size="sm" className="h-8 rounded-lg border-slate-100 bg-white text-slate-500 hover:bg-slate-50 text-xs">
+            <Button variant="outline" size="sm" className="h-8 rounded-lg border-slate-200 bg-white text-slate-600 hover:bg-slate-50 text-xs">
               Last 30 days
             </Button>
-            <Button variant="outline" size="sm" className="h-8 rounded-lg border-slate-100 bg-white text-slate-500 hover:bg-slate-50 text-xs">
+            <Button variant="outline" size="sm" className="h-8 rounded-lg border-slate-200 bg-white text-slate-600 hover:bg-slate-50 text-xs">
               Filter
             </Button>
-            <Button variant="outline" size="sm" className="h-8 rounded-lg border-slate-100 bg-white text-slate-500 hover:bg-slate-50 text-xs">
+            <Button variant="outline" size="sm" className="h-8 rounded-lg border-slate-200 bg-white text-slate-600 hover:bg-slate-50 text-xs">
               Export
             </Button>
-            <Button className="h-8 gap-1.5 rounded-lg bg-slate-500 text-white hover:bg-slate-600 text-xs font-medium">
+            <Button className="h-8 gap-1.5 rounded-lg bg-blue-800 text-white hover:bg-blue-900 text-xs font-medium">
               <Plus className="size-4" />
               Add Deal
             </Button>
