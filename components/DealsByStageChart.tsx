@@ -41,7 +41,7 @@ export function DealsByStageChart({ deals }: DealsByStageChartProps) {
           />
           <Bar
             dataKey="count"
-            fill="#cbd5e1"
+            fill="rgba(147, 197, 253, 0.7)"
             radius={[4, 4, 0, 0]}
             maxBarSize={36}
           />

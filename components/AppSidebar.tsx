@@ -21,7 +21,7 @@ const navItems = [
   { href: "/apps", label: "Apps", icon: Grid3X3 },
   { href: "/ai-agents", label: "AI agents", icon: Bot },
   { href: "/campaigns", label: "Campaigns", icon: Megaphone },
-  { href: "#", label: "Pipelines", icon: GitBranch, badge: "Soon" },
+  { href: "/pipelines", label: "Pipelines", icon: GitBranch },
 ];
 
 export function AppSidebar() {
@@ -57,33 +57,19 @@ export function AppSidebar() {
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = pathname === item.href;
-          const content = (
-            <>
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={cn(
+                "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
+                isActive
+                  ? "bg-slate-600 text-white"
+                  : "text-slate-300 hover:bg-white/10 hover:text-white"
+              )}
+            >
               <Icon className="size-5 shrink-0" />
               <span className="flex-1 truncate">{item.label}</span>
-              {item.badge && (
-                <span className="rounded bg-amber-400/20 px-1.5 py-0.5 text-[10px] font-medium text-amber-300">
-                  {item.badge}
-                </span>
-              )}
-            </>
-          );
-          const className = cn(
-            "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
-            isActive
-              ? "bg-slate-600 text-white"
-              : "text-slate-300 hover:bg-white/10 hover:text-white"
-          );
-          if (item.href === "#") {
-            return (
-              <span key={item.label} className={cn(className, "cursor-default")}>
-                {content}
-              </span>
-            );
-          }
-          return (
-            <Link key={item.href} href={item.href} className={className}>
-              {content}
             </Link>
           );
         })}

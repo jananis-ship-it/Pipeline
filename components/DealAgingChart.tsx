@@ -30,8 +30,8 @@ export function DealAgingChart({ deals }: DealAgingChartProps) {
         <AreaChart data={distribution} margin={{ top: 12, right: 12, left: 0, bottom: 0 }}>
           <defs>
             <linearGradient id="agingFill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#94a3b8" stopOpacity={0.2} />
-              <stop offset="100%" stopColor="#94a3b8" stopOpacity={0} />
+              <stop offset="0%" stopColor="#5eead4" stopOpacity={0.35} />
+              <stop offset="100%" stopColor="#5eead4" stopOpacity={0} />
             </linearGradient>
           </defs>
           <XAxis
@@ -58,7 +58,7 @@ export function DealAgingChart({ deals }: DealAgingChartProps) {
           <Area
             type="monotone"
             dataKey="count"
-            stroke="#94a3b8"
+            stroke="#2dd4bf"
             strokeWidth={1.5}
             fill="url(#agingFill)"
           />

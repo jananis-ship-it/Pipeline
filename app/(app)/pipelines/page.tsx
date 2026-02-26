@@ -3,17 +3,17 @@
 import Link from "next/link";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Workflow, Plus } from "lucide-react";
+import { GitBranch, Plus } from "lucide-react";
 
-export default function WorkflowsPage() {
+export default function PipelinesPage() {
   return (
     <div className="flex flex-1 flex-col overflow-hidden">
       <div className="flex shrink-0 items-center justify-between border-b border-slate-200 bg-white px-6 py-4">
-        <h1 className="text-xl font-medium tracking-tight text-slate-700">Workflows</h1>
+        <h1 className="text-xl font-medium tracking-tight text-slate-700">Pipelines</h1>
         <Button asChild className="h-8 gap-1.5 rounded-lg bg-slate-500 text-white hover:bg-slate-600 text-xs font-medium">
-          <Link href="/workflows/create">
+          <Link href="/pipelines/new">
             <Plus className="size-4" />
-            New workflow
+            New pipeline
           </Link>
         </Button>
       </div>
@@ -22,21 +22,21 @@ export default function WorkflowsPage() {
           <CardHeader>
             <div className="flex items-center gap-3">
               <div className="flex size-12 items-center justify-center rounded-xl bg-slate-100 text-slate-500">
-                <Workflow className="size-6" />
+                <GitBranch className="size-6" />
               </div>
               <div>
-                <h2 className="text-base font-semibold text-slate-700">Automate your pipeline</h2>
+                <h2 className="text-base font-semibold text-slate-700">Deal pipelines</h2>
                 <p className="text-sm text-slate-500">
-                  Create workflows that run when deals move stages, when activity is logged, or on a schedule.
+                  Manage stages and track deals through your sales pipeline.
                 </p>
               </div>
             </div>
           </CardHeader>
           <CardContent>
             <div className="rounded-lg border border-dashed border-slate-200 bg-slate-50/50 p-8 text-center">
-              <p className="text-xs text-slate-500">No workflows yet.</p>
+              <p className="text-xs text-slate-500">No pipelines yet.</p>
               <Button asChild variant="outline" size="sm" className="mt-3 rounded-lg border-slate-200 text-xs">
-                <Link href="/workflows/create">Create your first workflow</Link>
+                <Link href="/pipelines/new">Create your first pipeline</Link>
               </Button>
             </div>
           </CardContent>

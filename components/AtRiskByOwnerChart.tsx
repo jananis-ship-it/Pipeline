@@ -3,7 +3,7 @@
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from "recharts";
 import type { ScoredDeal } from "@/lib/types";
 
-const LIGHT_COLORS = ["#e2e8f0", "#cbd5e1", "#94a3b8", "#f1f5f9", "#e2e8f0"];
+const LIGHT_COLORS = ["rgba(147, 197, 253, 0.8)", "rgba(253, 164, 175, 0.8)", "rgba(94, 234, 212, 0.8)", "rgba(253, 224, 71, 0.6)", "rgba(196, 181, 253, 0.7)"];
 
 interface AtRiskByOwnerChartProps {
   deals: ScoredDeal[];

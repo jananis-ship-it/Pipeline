@@ -44,7 +44,7 @@ function Avatar({ name }: { name: string }) {
   const hue = name.split("").reduce((a, c) => a + c.charCodeAt(0), 0) % 360;
   return (
     <div
-      className="flex size-8 shrink-0 items-center justify-center rounded-full text-xs font-medium text-white"
+      className="flex size-6 shrink-0 items-center justify-center rounded-full text-[10px] font-medium text-white"
       style={{ backgroundColor: `hsl(${hue}, 55%, 45%)` }}
     >
       {initial}
@@ -56,9 +56,9 @@ function CompanyCell({ company }: { company: string }) {
   const initial = company.slice(0, 1).toUpperCase();
   const hue = company.split("").reduce((a, c) => a + c.charCodeAt(0), 0) % 360;
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-1.5 min-w-0">
       <div
-        className="flex size-8 shrink-0 items-center justify-center rounded-lg text-xs font-semibold text-white"
+        className="flex size-6 shrink-0 items-center justify-center rounded text-[10px] font-semibold text-white"
         style={{ backgroundColor: `hsl(${hue}, 50%, 40%)` }}
       >
         {initial}
@@ -77,7 +77,7 @@ function StatusBadge({ status }: { status: "Healthy" | "Watch" | "At Risk" }) {
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-md px-2 py-0.5 text-xs font-medium",
+        "inline-flex items-center rounded px-1.5 py-0.5 text-[11px] font-medium whitespace-nowrap",
         styles[status]
       )}
     >
@@ -171,16 +171,16 @@ export function DealsTable({ deals, onSelectDeal }: DealsTableProps) {
   }) => (
     <th
       className={cn(
-        "text-left text-xs font-medium text-slate-500 px-4 py-3 cursor-pointer hover:bg-slate-100 transition-colors",
+        "text-left text-[11px] font-medium text-slate-500 px-2 py-2 cursor-pointer hover:bg-slate-100 transition-colors whitespace-nowrap",
         className
       )}
       onClick={() => toggleSort(keyName)}
     >
-      <div className="flex items-center gap-2">
-        {Icon && <Icon className="size-4 shrink-0" />}
+      <div className="flex items-center gap-1">
+        {Icon && <Icon className="size-3.5 shrink-0" />}
         <span>{label}</span>
         <ChevronDown
-          className={cn("size-4 shrink-0 opacity-50", sortKey === keyName && "opacity-100")}
+          className={cn("size-3.5 shrink-0 opacity-50", sortKey === keyName && "opacity-100")}
         />
       </div>
     </th>
@@ -224,12 +224,12 @@ export function DealsTable({ deals, onSelectDeal }: DealsTableProps) {
         </div>
       </div>
 
-      <div className="rounded-2xl border border-slate-200/80 overflow-hidden bg-white shadow-sm">
+      <div className="rounded-xl border border-slate-100 overflow-hidden bg-white shadow-none">
         <div className="overflow-x-auto">
-          <table className="w-full min-w-[1000px] text-sm">
+          <table className="w-full min-w-[900px] text-xs">
             <thead>
               <tr className="border-b border-slate-200 bg-slate-50/80">
-                <th className="w-10 px-4 py-3">
+                <th className="w-8 px-2 py-2">
                   <button
                     type="button"
                     onClick={toggleSelectAll}
@@ -244,32 +244,32 @@ export function DealsTable({ deals, onSelectDeal }: DealsTableProps) {
                   </button>
                 </th>
                 <Th label="Deal name" keyName="company" icon={User} />
-                <th className="text-left text-xs font-medium text-slate-500 px-4 py-3">
-                  <div className="flex items-center gap-2">
-                    <Building2 className="size-4" />
+                <th className="text-left text-[11px] font-medium text-slate-500 px-2 py-2">
+                  <div className="flex items-center gap-1">
+                    <Building2 className="size-3.5" />
                     Company
                   </div>
                 </th>
-                <th className="text-left text-xs font-medium text-slate-500 px-4 py-3">Stage</th>
-                <th className="text-left text-xs font-medium text-slate-500 px-4 py-3">Owner</th>
+                <th className="text-left text-[11px] font-medium text-slate-500 px-2 py-2">Stage</th>
+                <th className="text-left text-[11px] font-medium text-slate-500 px-2 py-2">Owner</th>
                 <Th label="Value" keyName="value" icon={DollarSign} />
-                <th className="text-left text-xs font-medium text-slate-500 px-4 py-3">
-                  <div className="flex items-center gap-2">
-                    <Calendar className="size-4" />
+                <th className="text-left text-[11px] font-medium text-slate-500 px-2 py-2">
+                  <div className="flex items-center gap-1">
+                    <Calendar className="size-3.5" />
                     Last activity
                   </div>
                 </th>
-                <th className="text-left text-xs font-medium text-slate-500 px-4 py-3">Days (activity)</th>
-                <th className="text-left text-xs font-medium text-slate-500 px-4 py-3">Days (stage)</th>
-                <th className="text-left text-xs font-medium text-slate-500 px-4 py-3">Touches</th>
-                <th className="text-left text-xs font-medium text-slate-500 px-4 py-3">
-                  <div className="flex items-center gap-2">
-                    <Tag className="size-4" />
+                <th className="text-left text-[11px] font-medium text-slate-500 px-2 py-2">Days (act.)</th>
+                <th className="text-left text-[11px] font-medium text-slate-500 px-2 py-2">Days (stage)</th>
+                <th className="text-left text-[11px] font-medium text-slate-500 px-2 py-2">Touches</th>
+                <th className="text-left text-[11px] font-medium text-slate-500 px-2 py-2">
+                  <div className="flex items-center gap-1">
+                    <Tag className="size-3.5" />
                     Lead source
                   </div>
                 </th>
                 <Th label="Risk" keyName="riskScore" icon={AlertTriangle} />
-                <th className="text-left text-xs font-medium text-slate-500 px-4 py-3">Status</th>
+                <th className="text-left text-[11px] font-medium text-slate-500 px-2 py-2">Status</th>
               </tr>
             </thead>
             <tbody>
@@ -279,38 +279,40 @@ export function DealsTable({ deals, onSelectDeal }: DealsTableProps) {
                   className="border-b border-slate-100 hover:bg-slate-50 cursor-pointer transition-colors last:border-0"
                   onClick={() => onSelectDeal(deal)}
                 >
-                  <td className="px-4 py-3" onClick={(e) => e.stopPropagation()}>
+                  <td className="w-8 px-2 py-2" onClick={(e) => e.stopPropagation()}>
                     <button
                       type="button"
                       onClick={() => toggleSelect(deal.id)}
                       className="rounded p-0.5 hover:bg-slate-100"
                     >
                       {selectedIds.has(deal.id) ? (
-                        <CheckSquare className="size-4 text-slate-500" />
+                        <CheckSquare className="size-3.5 text-slate-500" />
                       ) : (
-                        <Square className="size-4 text-slate-400" />
+                        <Square className="size-3.5 text-slate-400" />
                       )}
                     </button>
                   </td>
-                  <td className="px-4 py-3">
-                    <div className="flex items-center gap-3">
+                  <td className="max-w-[140px] px-2 py-2">
+                    <div className="flex items-center gap-2 min-w-0">
                       <Avatar name={deal.owner} />
-                      <span className="font-medium">{deal.name}</span>
+                      <span className="font-medium truncate">{deal.name}</span>
                     </div>
                   </td>
-                  <td className="px-4 py-3">
-                    <CompanyCell company={deal.company} />
+                  <td className="max-w-[120px] px-2 py-2">
+                    <div className="min-w-0">
+                      <CompanyCell company={deal.company} />
+                    </div>
                   </td>
-                  <td className="px-4 py-3 text-slate-500">{deal.stage}</td>
-                  <td className="px-4 py-3">{deal.owner}</td>
-                  <td className="px-4 py-3 tabular-nums">{formatCurrency(deal.value)}</td>
-                  <td className="px-4 py-3 text-slate-500">{formatDate(deal.lastActivityAt)}</td>
-                  <td className="px-4 py-3 tabular-nums">{deal.daysSinceActivity}</td>
-                  <td className="px-4 py-3 tabular-nums">{deal.daysInStage}</td>
-                  <td className="px-4 py-3">{deal.touchesCount}</td>
-                  <td className="px-4 py-3 text-slate-500">{deal.leadSource}</td>
-                  <td className="px-4 py-3 tabular-nums">{deal.risk.score}</td>
-                  <td className="px-4 py-3">
+                  <td className="px-2 py-2 text-slate-500 whitespace-nowrap">{deal.stage}</td>
+                  <td className="px-2 py-2 whitespace-nowrap">{deal.owner}</td>
+                  <td className="px-2 py-2 tabular-nums whitespace-nowrap">{formatCurrency(deal.value)}</td>
+                  <td className="px-2 py-2 text-slate-500 whitespace-nowrap">{formatDate(deal.lastActivityAt)}</td>
+                  <td className="px-2 py-2 tabular-nums">{deal.daysSinceActivity}</td>
+                  <td className="px-2 py-2 tabular-nums">{deal.daysInStage}</td>
+                  <td className="px-2 py-2">{deal.touchesCount}</td>
+                  <td className="px-2 py-2 text-slate-500 whitespace-nowrap">{deal.leadSource}</td>
+                  <td className="px-2 py-2 tabular-nums">{deal.risk.score}</td>
+                  <td className="px-2 py-2">
                     <StatusBadge status={deal.risk.status} />
                   </td>
                 </tr>
@@ -320,8 +322,8 @@ export function DealsTable({ deals, onSelectDeal }: DealsTableProps) {
         </div>
       </div>
 
-      <div className="flex flex-wrap items-center justify-between gap-4 pt-4">
-        <p className="text-sm text-slate-500">
+      <div className="flex flex-wrap items-center justify-between gap-4 pt-3">
+        <p className="text-xs text-slate-500">
           Showing {start + 1}–{Math.min(start + PAGE_SIZE, filteredAndSorted.length)} of {filteredAndSorted.length} deals
         </p>
         <div className="flex items-center gap-2">

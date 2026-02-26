@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Bot, Plus, Sparkles } from "lucide-react";
@@ -13,11 +14,13 @@ const agents = [
 export default function AIAgentsPage() {
   return (
     <div className="flex flex-1 flex-col overflow-hidden">
-      <div className="flex shrink-0 items-center justify-between border-b border-border bg-card px-6 py-4">
-        <h1 className="text-2xl font-semibold tracking-tight">AI agents</h1>
-        <Button className="gap-2 bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm">
-          <Plus className="size-4" />
-          New agent
+      <div className="flex shrink-0 items-center justify-between border-b border-slate-200 bg-white px-6 py-4">
+        <h1 className="text-xl font-medium tracking-tight text-slate-700">AI agents</h1>
+        <Button asChild className="h-8 gap-1.5 rounded-lg bg-slate-500 text-white hover:bg-slate-600 text-xs font-medium">
+          <Link href="/ai-agents/create">
+            <Plus className="size-4" />
+            New agent
+          </Link>
         </Button>
       </div>
       <main className="flex-1 overflow-y-auto p-6">
@@ -55,7 +58,9 @@ export default function AIAgentsPage() {
               <h3 className="font-semibold">Use AI in your pipeline</h3>
               <p className="text-sm text-muted-foreground">Agents can summarize deals, suggest next steps, and score risk.</p>
             </div>
-            <Button className="ml-auto">Create agent</Button>
+            <Button asChild className="ml-auto h-8 rounded-lg bg-slate-500 text-white hover:bg-slate-600 text-xs">
+            <Link href="/ai-agents/create">Create agent</Link>
+          </Button>
           </CardContent>
         </Card>
       </main>
